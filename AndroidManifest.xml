@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.test.mobilesafe"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/shield"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
+        <activity
+            android:name=".LostFindActivity"
+            android:label="@string/title_activity_lost_find" >
+        </activity>
+        <activity
+            android:name=".LostGuideSetActivity"
+            android:label="@string/title_activity_lost_guide_set" >
+        </activity>
+        <activity
+            android:name=".LostGuideSet2Activity"
+            android:label="@string/title_activity_lost_guide_set2" >
+        </activity>
+        <activity
+            android:name=".LostGuideSet3Activity"
+            android:label="@string/title_activity_lost_guide_set3" >
+        </activity>
+        <activity
+            android:name=".LostGuideSet4Activity"
+            android:label="@string/title_activity_lost_guide_set4" >
+        </activity>
+        <activity
+            android:name=".BaseLostSetupActivity"
+            android:label="@string/title_activity_base_lost_setup" >
+        </activity>
+        <activity
+            android:name=".SelectContactActivity"
+            android:label="@string/title_activity_select_contact" >
+        </activity>
+         <!-- Activity that allows the user to send new SMS/MMS messages --> 
+        <activity
+            android:name=".AtoolsActivity"
+            android:label="@string/title_activity_atools" >
+            <intent-filter>  
+                <action android:name="android.intent.action.SEND" />                  
+                <action android:name="android.intent.action.SENDTO" />  
+                <category android:name="android.intent.category.DEFAULT" />  
+                <category android:name="android.intent.category.BROWSABLE" />  
+                <data android:scheme="sms" />  
+                <data android:scheme="smsto" />  
+                <data android:scheme="mms" />  
+                <data android:scheme="mmsto" />  
+            </intent-filter>   
+        </activity>
+        <activity
+            android:name=".NumberAddressQueryActivity"
+            android:label="@string/title_activity_number_address_query" >
+        </activity>
+
+        <receiver android:name=".receiver.BootCompleteReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.SMSReceiver" >
+            <intent-filter android:priority="1000" >
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.MyAdminReceiver"
+            android:description="@string/sample_device_admin_description"
+            android:label="@string/sample_device_admin"
+            android:permission="android.permission.BIND_DEVICE_ADMIN" >
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_sample" />
+
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.MyWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/process_widget_provider" />
+        </receiver>
+        <receiver android:name=".receiver.KillAllReceiver" >
+            <intent-filter>
+                <action android:name="com.test.mobilesafe.killall" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".service.GPSService" />
+        <service android:name=".service.LockScreen" />
+        <service android:name=".service.AddressService" />
+        <service android:name=".service.ModifyOffset" />
+        <service android:name=".service.CallSmsSafeService" />
+        <service android:name=".service.AutoCleanService" />
+        <service android:name=".service.UpdateWidgetService" />
+        <service android:name=".service.WatchDogService" />
+
+        <activity
+            android:name=".CallSmsSafeActivity"
+            android:label="@string/title_activity_call_sms_safe" >
+        </activity>
+        <activity
+            android:name=".AppManagerActivity"
+            android:label="@string/title_activity_app_manager" >
+        </activity>
+        <activity
+            android:name=".TaskManagerActivity"
+            android:label="@string/title_activity_task_manager" >
+        </activity>
+        <activity
+            android:name=".TaskSettingActivity"
+            android:label="@string/title_activity_task_setting" >
+        </activity>
+        <activity
+            android:name=".EnterPwdActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/title_activity_enter_pwd"
+            android:launchMode="singleInstance" >
+        </activity>
+        <activity
+            android:name=".TrafficManagerActivity"
+            android:label="@string/title_activity_traffic_manager" >
+        </activity>
+        <activity
+            android:name=".AntivirusActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_antivirus" >
+        </activity>
+        <activity
+            android:name=".CleanCacheActivity"
+            android:label="@string/title_activity_clean_cache" >
+        </activity>
+        
+        
+        <!-- BroadcastReceiver that listens for incoming SMS messages -->  
+        <receiver android:name=".SmsReceiver"  
+                android:permission="android.permission.BROADCAST_SMS">  
+            <intent-filter>  
+                <action android:name="android.provider.Telephony.SMS_DELIVER" />  
+            </intent-filter>  
+        </receiver>  
+  
+        <!-- BroadcastReceiver that listens for incoming MMS messages -->  
+        <receiver android:name=".MmsReceiver"  
+            android:permission="android.permission.BROADCAST_WAP_PUSH">  
+            <intent-filter>  
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />  
+                <data android:mimeType="application/vnd.wap.mms-message" />  
+            </intent-filter>  
+        </receiver>  
+  <!-- 
+        Activity that allows the user to send new SMS/MMS messages  
+        <activity android:name=".ComposeSmsActivity" >  
+            <intent-filter>  
+                <action android:name="android.intent.action.SEND" />                  
+                <action android:name="android.intent.action.SENDTO" />  
+                <category android:name="android.intent.category.DEFAULT" />  
+                <category android:name="android.intent.category.BROWSABLE" />  
+                <data android:scheme="sms" />  
+                <data android:scheme="smsto" />  
+                <data android:scheme="mms" />  
+                <data android:scheme="mmsto" />  
+            </intent-filter>  
+        </activity>   -->
+  
+        <!-- Service that delivers messages from the phone "quick response" -->  
+        <service android:name=".HeadlessSmsSendService"  
+                 android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE"  
+                 android:exported="true" >  
+            <intent-filter>  
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />  
+                <category android:name="android.intent.category.DEFAULT" />  
+                <data android:scheme="sms" />  
+                <data android:scheme="smsto" />  
+                <data android:scheme="mms" />  
+                <data android:scheme="mmsto" />  
+            </intent-filter>  
+        </service>  
+    </application>
+
+</manifest>
+
